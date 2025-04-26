@@ -5,11 +5,7 @@ import Experience from "./Experience.jsx";
 
 import * as THREE from "three";
 
-const homeCameraPosition = new THREE.Vector3(
-  5.139550062070692,
-  4.666900273456921,
-  1.7831608299110338
-);
+const homeCameraPosition = new THREE.Vector3(5, 4, 3);
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 

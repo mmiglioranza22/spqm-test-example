@@ -11,9 +11,10 @@ import { QuestsBoard } from "./QuestsBoard";
 import { Analytics } from "./Analytics";
 import { CurrentQuests } from "./CurrentQuests";
 import * as THREE from "three";
-import { Entrance } from "./Entrance";
-import { Doors } from "./Doors";
-import { Banner } from "./Banner";
+import { Entrance } from "./entrance/Entrance";
+import { Doors } from "./entrance/Doors";
+import { Banner } from "./entrance/Banner";
+import { useControls } from "leva";
 
 const homeCameraPosition = new THREE.Vector3(
   6.576581911370812,
@@ -22,7 +23,7 @@ const homeCameraPosition = new THREE.Vector3(
 );
 
 export default function Experience() {
-  const cube = useRef();
+  // const { questBoardCoor, currentQuestsCoor, analyticsCoor } = useControls();
 
   useFrame((state, delta) => {});
 
@@ -37,20 +38,16 @@ export default function Experience() {
     // event.preventDefault();
     event.stopPropagation();
     console.log(event);
-    event.camera.pos;
   };
 
   const bakedTexture = useTexture("/baked_night_entrance.jpg");
-  console.log(bakedTexture);
-
   const { nodes } = useGLTF("/merged_entrance.glb");
-  console.log(nodes);
 
   return (
     <>
       <OrbitControls makeDefault />
       {/*  */}
-      <directionalLight position={[1, 2, 3]} intensity={0.5} />
+      <directionalLight position={[1, 2, 3]} intensity={2} />
       {/* <ambientLight intensity={1} /> */}
 
       {/* interior */}
