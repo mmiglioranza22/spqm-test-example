@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
+import { Select } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 export function QuestsBoard(props) {
@@ -12,61 +13,63 @@ export function QuestsBoard(props) {
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
       >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube132.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["Cork.002"]
-          }
-          material-wireframe={shiny}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube132_1.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["Darkwood.006"]
-          }
-          material-wireframe={shiny}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube132_2.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["Paper.003"]
-          }
-          material-wireframe={shiny}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube132_3.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["Paper.004"]
-          }
-          material-wireframe={shiny}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube132_4.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["Crimson.002"]
-          }
-          material-wireframe={shiny}
-        />
+        <Select enabled={shiny}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube132.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["Cork.002"]
+            }
+            // material-wireframe={shiny}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube132_1.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["Darkwood.006"]
+            }
+            // material-wireframe={shiny}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube132_2.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["Paper.003"]
+            }
+            // material-wireframe={shiny}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube132_3.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["Paper.004"]
+            }
+            // material-wireframe={shiny}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube132_4.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["Crimson.002"]
+            }
+            // material-wireframe={shiny}
+          />
+        </Select>
       </group>
     </group>
   );

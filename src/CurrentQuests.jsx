@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
+import { Select } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 export function CurrentQuests(props) {
@@ -23,39 +24,41 @@ export function CurrentQuests(props) {
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
       >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube003.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["Metal.004"]
-          }
-          material-wireframe={shiny}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube003_1.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["Firewood.002"]
-          }
-          material-wireframe={shiny}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube003_2.geometry}
-          material={
-            shiny
-              ? new THREE.MeshBasicMaterial({ color: "red" })
-              : materials["ShinyMetal.001"]
-          }
-          material-wireframe={shiny}
-        />
+        <Select enabled={shiny}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube003.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["Metal.004"]
+            }
+            // material-wireframe={shiny}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube003_1.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["Firewood.002"]
+            }
+            // material-wireframe={shiny}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube003_2.geometry}
+            material={
+              shiny
+                ? new THREE.MeshBasicMaterial({ color: "red" })
+                : materials["ShinyMetal.001"]
+            }
+            // material-wireframe={shiny}
+          />
+        </Select>
       </group>
     </group>
   );

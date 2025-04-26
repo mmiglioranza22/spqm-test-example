@@ -15,6 +15,11 @@ import { Entrance } from "./entrance/Entrance";
 import { Doors } from "./entrance/Doors";
 import { Banner } from "./entrance/Banner";
 import { useControls } from "leva";
+import {
+  Selection,
+  EffectComposer,
+  Outline,
+} from "@react-three/postprocessing";
 
 const homeCameraPosition = new THREE.Vector3(
   6.576581911370812,
@@ -48,17 +53,27 @@ export default function Experience() {
       <OrbitControls makeDefault />
       {/*  */}
       <directionalLight position={[1, 2, 3]} intensity={2} />
+      <Environment background files={"./HdrSkySunset007_JPG_2K.jpg"} />
       {/* <ambientLight intensity={1} /> */}
 
       {/* interior */}
 
       <Scene onClick={resetCamera} />
-      <QuestsBoard onClick={moveCamera} />
-      <Analytics onClick={moveCamera} />
-      <CurrentQuests onClick={moveCamera} />
+      <Selection>
+        <EffectComposer multisampling={8} autoClear={false}>
+          <Outline
+            blur
+            visibleEdgeColor="white"
+            edgeStrength={100}
+            width={10000}
+          />
+        </EffectComposer>
+        <QuestsBoard onClick={moveCamera} />
+        <Analytics onClick={moveCamera} />
+        <CurrentQuests onClick={moveCamera} />
+      </Selection>
 
       {/* entrance */}
-      <Environment background files={"./HdrSkySunset007_JPG_2K.jpg"} />
       {/* <Entrance bakedTexture={bakedTexture} />  */}
       {/* <Doors /> */}
       {/* <Banner /> */}
