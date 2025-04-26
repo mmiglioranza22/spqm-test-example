@@ -1,11 +1,27 @@
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useBounds, useGLTF } from "@react-three/drei";
 
 export function Scene(props) {
   const { nodes, materials } = useGLTF("/merged.glb");
+  const ref = useRef(null);
+  const bounds = useBounds();
+  // handle focus flag to avoid rotation on clickaway in scene
+  const handleClick = (event) => {
+    // event.stopPropagation();
+    bounds
+      .refresh()
+      .moveTo([5, 4, 3])
+      .lookAt({ target: [0, 0, 0] });
+
+    console.log({ event, bounds });
+  };
   return (
     <group {...props} dispose={null}>
-      <group position={[4.587, 0.375, -4.201]}>
+      <group
+        position={[4.587, 0.375, -4.201]}
+        onClick={handleClick} // eventually handle reset
+        ref={ref}
+      >
         <mesh
           castShadow
           receiveShadow

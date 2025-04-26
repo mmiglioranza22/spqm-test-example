@@ -1,17 +1,27 @@
 import React, { useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useBounds, useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 export function QuestsBoard(props) {
   const { nodes, materials } = useGLTF("/questBoard.glb");
   const [shiny, setShiny] = useState(false);
+
+  const ref = useRef(null);
+  const bounds = useBounds();
+
+  const handleClick = (event) => {
+    event.stopPropagation();
+    bounds.refresh(ref.current).clip().fit();
+  };
   return (
     <group {...props} dispose={null}>
       <group
         position={[-2.309, 0.375, -3.678]}
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
+        onClick={handleClick}
+        ref={ref}
       >
         <Select enabled={shiny}>
           <mesh

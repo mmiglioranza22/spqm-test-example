@@ -1,18 +1,29 @@
 import React, { useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei";
-import { Select } from "@react-three/postprocessing";
+import { useBounds, useGLTF } from "@react-three/drei";
+import { Select } from "@react-three/postprocessing"; // issue with outline max update depth exceeded
 import * as THREE from "three";
 
 export function Analytics(props) {
   const { nodes, materials } = useGLTF("/analytics.glb");
   const [shiny, setShiny] = useState(false);
 
+  const ref = useRef(null);
+  const bounds = useBounds();
+
+  const handleClick = (event) => {
+    event.stopPropagation();
+    bounds.refresh(ref.current).clip().fit();
+  };
+
   return (
     <group {...props} dispose={null}>
       <group
         position={[-1.985, 0.936, 3.929]}
+        onClick={handleClick}
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
+        ref={ref}
+        // onPointerMissed={handleClickAway}
       >
         <Select enabled={shiny}>
           <mesh

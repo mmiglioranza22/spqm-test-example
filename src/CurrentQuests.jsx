@@ -1,28 +1,32 @@
-import React, { useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import React, { useEffect, useRef, useState } from "react";
+import { useBounds, useGLTF } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 export function CurrentQuests(props) {
   const { nodes, materials } = useGLTF("/currentQuests.glb");
-  const state = useThree((state) => state);
-  console.log(state.camera);
   const [shiny, setShiny] = useState(false);
 
-  // const handleHover = (event) => {
-  //   state.camera.position.set(1, 2, 4);
-  //   console.log(event);
-  // };
+  const ref = useRef(null);
+  const bounds = useBounds();
 
-  console.log(materials);
+  const handleClick = (event) => {
+    event.stopPropagation();
+    bounds.refresh(ref.current).clip().fit();
+  };
+
+  // console.log(materials);
+
   return (
     <group {...props} dispose={null}>
       <group
         position={[4.574, 0.375, -5.053]}
-        // onClick={handleClick}
+        onClick={handleClick}
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
+        ref={ref}
+        // onPointerMissed={handleClickAway}
       >
         <Select enabled={shiny}>
           <mesh
