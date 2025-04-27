@@ -12,9 +12,37 @@ export function Analytics(props) {
 
   const handleClick = (event) => {
     event.stopPropagation();
-    bounds.refresh(ref.current).clip().fit();
+
+    const cameraPosition = new THREE.Vector3(
+      -2.0129043553679864,
+      3.3695834864481564 - 0.5,
+      -0.7904034965711544 + 2
+    );
+    bounds
+      .refresh()
+      .moveTo(cameraPosition)
+      .lookAt({
+        target: [
+          ref.current.position.x,
+          ref.current.position.y,
+          ref.current.position.z - 1,
+        ],
+      });
   };
 
+  const handleResetView = (event) => {
+    event.stopPropagation();
+    console.log(event.camera);
+    const resetPosition = new THREE.Vector3(
+      -5.745691279976633,
+      1.2191882466552388,
+      4.710918244500102
+    );
+    bounds
+      .refresh()
+      .moveTo(resetPosition)
+      .lookAt({ target: [0, 0, 0] });
+  };
   return (
     <group {...props} dispose={null}>
       <group
@@ -23,7 +51,7 @@ export function Analytics(props) {
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
         ref={ref}
-        // onPointerMissed={handleClickAway}
+        onContextMenu={handleResetView}
       >
         <Select enabled={shiny}>
           <mesh

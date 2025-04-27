@@ -13,20 +13,43 @@ export function CurrentQuests(props) {
 
   const handleClick = (event) => {
     event.stopPropagation();
-    bounds.refresh(ref.current).clip().fit();
+    const cameraPosition = new THREE.Vector3(
+      4.279669179559201 - 0.5,
+      1.8270857672106804 - 0.1,
+      -3.885972702430759 + 1
+    );
+
+    bounds
+      .refresh(ref.current)
+      .moveTo(cameraPosition)
+      .lookAt({
+        target: [
+          ref.current.position.x,
+          ref.current.position.y,
+          ref.current.position.z,
+        ],
+      });
   };
 
-  // console.log(materials);
+  const handleResetView = (event) => {
+    event.stopPropagation();
+    console.log(event.camera);
+    const resetPosition = new THREE.Vector3(5, 4, 3);
+    bounds
+      .refresh()
+      .moveTo(resetPosition)
+      .lookAt({ target: [0, 0, 0] });
+  };
 
   return (
     <group {...props} dispose={null}>
       <group
-        position={[4.574, 0.375, -5.053]}
+        position={[2.817, 1.457, -3.345]}
         onClick={handleClick}
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
         ref={ref}
-        // onPointerMissed={handleClickAway}
+        onContextMenu={handleResetView}
       >
         <Select enabled={shiny}>
           <mesh

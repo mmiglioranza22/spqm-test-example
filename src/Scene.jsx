@@ -8,12 +8,7 @@ export function Scene(props) {
   // handle focus flag to avoid rotation on clickaway in scene
   const handleClick = (event) => {
     // event.stopPropagation();
-    bounds
-      .refresh()
-      .moveTo([5, 4, 3])
-      .lookAt({ target: [0, 0, 0] });
-
-    console.log({ event, bounds });
+    console.log({ event });
   };
   return (
     <group {...props} dispose={null}>

@@ -12,7 +12,30 @@ export function QuestsBoard(props) {
 
   const handleClick = (event) => {
     event.stopPropagation();
-    bounds.refresh(ref.current).clip().fit();
+    const cameraPosition = new THREE.Vector3(-2.5, 1.5, -1.5);
+    bounds
+      .refresh(ref.current)
+      .moveTo(cameraPosition)
+      .lookAt({
+        target: [
+          ref.current.position.x - 0.1,
+          ref.current.position.y + 1,
+          ref.current.position.z,
+        ],
+      });
+  };
+  const handleResetView = (event) => {
+    event.stopPropagation();
+    console.log(event.camera);
+    const resetPosition = new THREE.Vector3(
+      -6.169008400272004 - 0.05,
+      2.3222183721680523 - 0.5,
+      -3.4572097476432555
+    );
+    bounds
+      .refresh()
+      .moveTo(resetPosition)
+      .lookAt({ target: [0, 1, 0] });
   };
   return (
     <group {...props} dispose={null}>
@@ -21,6 +44,7 @@ export function QuestsBoard(props) {
         onPointerEnter={() => setShiny(true)}
         onPointerLeave={() => setShiny(false)}
         onClick={handleClick}
+        onContextMenu={handleResetView}
         ref={ref}
       >
         <Select enabled={shiny}>
