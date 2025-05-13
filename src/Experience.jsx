@@ -59,7 +59,7 @@ export default function Experience() {
 
   return (
     <>
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
       <OrbitControls makeDefault />
       {/*  */}
       <directionalLight position={[1, 2, 3]} intensity={2} />
