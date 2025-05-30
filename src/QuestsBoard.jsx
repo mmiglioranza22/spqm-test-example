@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useBounds, useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import * as THREE from "three";
+import { useRouter } from "next/navigation";
 
 export function QuestsBoard(props) {
   const { nodes, materials } = useGLTF("/questBoard.glb");
@@ -9,6 +10,7 @@ export function QuestsBoard(props) {
 
   const ref = useRef(null);
   const bounds = useBounds();
+  const router = useRouter();
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -23,6 +25,7 @@ export function QuestsBoard(props) {
           ref.current.position.z,
         ],
       });
+    router.push("/quests/123");
   };
   const handleResetView = (event) => {
     event.stopPropagation();
