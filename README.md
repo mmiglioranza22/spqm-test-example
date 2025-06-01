@@ -1,6 +1,6 @@
 ## [React-three-fiber application](https://spqm-test-example-mmiglioranza22s-projects.vercel.app/) for SPQM application
 
-`main` branch is used as a submodule for a Nextjs proyect, it will break if you try to run it.
+`main` branch is used as a submodule for a Nextjs project, it will break if you try to run it.
 
 Use `develop` branch to start the application locally.
 Interaction with actionable objects (the ones that hover in red) can be done by left and right click (context menu).
