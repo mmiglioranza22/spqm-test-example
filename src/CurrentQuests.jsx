@@ -3,10 +3,13 @@ import { useBounds, useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import * as THREE from "three";
+import { useRouter } from "next/navigation";
 
 export function CurrentQuests(props) {
   const { nodes, materials } = useGLTF("/currentQuests.glb");
   const [shiny, setShiny] = useState(false);
+  // next navigation
+  const router = useRouter();
 
   const ref = useRef(null);
   const bounds = useBounds();
@@ -29,6 +32,7 @@ export function CurrentQuests(props) {
           ref.current.position.z,
         ],
       });
+    router.push("/tracked");
   };
 
   const handleResetView = (event) => {
