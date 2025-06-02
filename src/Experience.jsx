@@ -5,7 +5,7 @@ import {
   Bounds,
   useBounds,
   // useGLTF,
-  // useTexture,
+  useTexture,
 } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { useEffect, useRef } from "react";
@@ -25,6 +25,7 @@ import {
   EffectComposer,
   Outline,
 } from "@react-three/postprocessing";
+import { Scene2 } from "./Scene2";
 
 const homeCameraPosition = new THREE.Vector3(
   6.576581911370812,
@@ -52,6 +53,7 @@ export default function Experience() {
 
   // const bakedTexture = useTexture("/baked_night_entrance.jpg");
   // const { nodes } = useGLTF("/merged_entrance.glb");
+  const bakedTexture = useTexture("/draft_baked.jpg");
 
   const interpolateFunc = (t) => 1 - Math.exp(-5 * t) + 0.007 * t; // Matches the default Bounds behavior
   const interpolateFunc1 = (t) => -t * t * t + 2 * t * t; // Start smoothly, finish linearly
@@ -68,9 +70,10 @@ export default function Experience() {
 
       {/* interior */}
       <Bounds maxDuration={1} interpolateFunc={interpolateFunc2}>
-        <Scene
+        {/* <Scene
         // onClick={resetCamera}
-        />
+        /> */}
+        <Scene2 bakedTexture={bakedTexture} />
 
         {/* outline on hover */}
         {/* <Selection> */}
